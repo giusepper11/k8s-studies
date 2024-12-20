@@ -1,9 +1,9 @@
-cluster_on:
+up:
 	@echo "Starting cluster"
 	@kind create cluster --config kind-cluster.yaml
 	@echo "Cluster started"
 
-cluster_off:
+down:
 	@echo "Stopping cluster"
 	@kind delete clusters giropops
 	@echo "Cluster stopped"
