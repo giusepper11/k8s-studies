@@ -24,10 +24,12 @@ spec:
           name: nginx
           resources:
             requests:
-              cpu: "0.25"
+              cpu: "0.1"
               memory: "64Mi"
             limits:
-              cpu: "0.5"
+              cpu: "0.25"
               memory: "128Mi"
+          livenessProbe:
+            
 
               
