@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: nginx-deployment
-  strategy: 
+  strategy:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
@@ -30,6 +30,22 @@ spec:
               cpu: "0.25"
               memory: "128Mi"
           livenessProbe:
-            
-
-              
+            # tcpSocket:
+            #   port: 80
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:80/
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
