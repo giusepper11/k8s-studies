@@ -1,6 +1,6 @@
 up:
 	@echo "Starting cluster"
-	@minikube start --nodes 3 -p giropops
+	@minikube start --nodes 3 -p giropops --driver=docker
 	@echo "Cluster started"
 
 kindup:
