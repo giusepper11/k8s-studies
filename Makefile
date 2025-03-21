@@ -1,6 +1,15 @@
 up:
 	@echo "Starting cluster"
-	@minikube start --nodes 3 -p giropops --driver=docker
+	@minikube start \
+		--cpus=4 \
+		--memory=6g \
+		--nodes 3 \
+		--bootstrapper=kubeadm \
+		--extra-config=kubelet.authentication-token-webhook=true \
+		--extra-config=kubelet.authorization-mode=Webhook \
+		--extra-config=scheduler.bind-address=0.0.0.0 \
+		--extra-config=controller-manager.bind-address=0.0.0.0
+	@minikube addons disable metrics-server
 	@echo "Cluster started"
 
 kindup:
@@ -10,7 +19,7 @@ kindup:
 
 down:
 	@echo "Stopping cluster"
-	@minikube stop -p giropops
+	@minikube stop
 	@echo "Cluster stopped"
 
 kinddown:
