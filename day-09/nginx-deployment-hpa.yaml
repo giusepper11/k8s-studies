@@ -22,3 +22,23 @@ spec:
         target:
           type: Utilization
           averageUtilization: 70
+    - type: ContainerResource
+      containerResource:
+        container: nginx-deployment
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 5
+      policies:
+        - periodSeconds: 10 
+          type: Percent
+          value: 100
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+        - periodSeconds: 10 
+          type: Percent
+          value: 100
